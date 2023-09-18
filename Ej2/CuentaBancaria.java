@@ -1,29 +1,3 @@
-/*
-1-Verificar si el programa funciona correctamente.
-
-2-Reemplazar el archivo Fecha.java con el archivo Fecha.java del ejercicio anterior que modificaron.
-
-3-Crear un método mostrarDatosCuentasyMovimiento que muestre los datos de todas las cuentas bancarias,
-con el saldo actual y la fecha del último movimiento en formato fecha larga. Utilizar este método para 
-mostrar los datos luego de realizar las operaciones solicitadas en los siguientes puntos.
---------------------------------------------------------------------------------------------------------
-4-Crear 2 nuevas cuentas bancarias solicitando los datos al usuario, asignándole a ambas un saldo de $ 
-20000 al momento de su creación. -----Modifique el TDA para lograr este objetivo al momento de crear las cuentas bancarias. 
-
-5-Tomar los recaudos necesarios para que la nueva cuenta no tenga un número de cuenta ya existente.
-
-6-Solicite al usuario las operaciones a realizar (retirar o depositar X cantidad de dinero) de la cuenta N, 
-donde N sea el número de la cuenta que ingresa el usuario. 
-
-7-Deberá verificar si la cuenta existe en el arreglo.
-
-8-Si existe, verificar que la operación pueda realizarse. Emitir un mensaje si fue exitoso o no.
- */
-
-/**
- *
- * @author ccarrasco
- */
 public class CuentaBancaria {
 	private int numero;
 	private String tipo;
@@ -43,13 +17,14 @@ public class CuentaBancaria {
 		documentoTitular = elDocumento;
 		fechaCreacion = laFecha;
 		fechaUltimoMov = laFecha;
-		saldo = 0;
+		saldo = 20000;
 	}
 
 	// Observadores
 	public int getNumero() {
 		return numero;
 	}
+
 
 	public String getTipo() {
 		return tipo;
@@ -119,7 +94,7 @@ public class CuentaBancaria {
 
 	// Disminuirá el valor del saldo segun el importe pasado por parámetro
 	private void decrementarSaldo(float importe) {
-		saldo += importe;
+		saldo -= importe;
 	}
 
 	// Modifica la fecha de ultimo movimiento con la fecha pasada por parámetro
@@ -146,19 +121,13 @@ public class CuentaBancaria {
 
 	public boolean retirar(float dinero, Fecha fechaRetiro) {
 		boolean puedeRetirar = false;
-		if (dinero <= saldo)
+		//agregada condición para revisar si existe algún saldo.
+		if (dinero <= saldo && saldo>0)
 			puedeRetirar = true;
 		if (puedeRetirar) {
 			decrementarSaldo(dinero);
 			actualizarFechaMovimiento(fechaRetiro);
 		}
 		return puedeRetirar;
-	}
-
-	public void creaCuenta(){
-		// Crear 2 nuevas cuentas bancarias solicitando los datos al usuario, asignándole a ambas un saldo de $ 
-		// 20000 al momento de su creación. -----Modifique el TDA para lograr este objetivo al momento de crear 
-		//las cuentas bancarias. 
-		// Tomar los recaudos necesarios para que la nueva cuenta no tenga un número de cuenta ya existente.
 	}
 }
